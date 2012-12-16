@@ -18,6 +18,7 @@ class BlockController(playerID:Int, val blockID:Int) extends Control(playerID) w
   def mouseMoved(oldx:Int, oldy:Int, newx:Int, newy:Int) {}
   def mousePressed(button:Int, x:Int, y:Int) {}
   def mouseReleased(button:Int, x:Int, y:Int) {}
+  
   def mouseWheelMoved(delta:Int) {
     (ControllableBlock list).filter(_.blockID == blockID) foreach {_(0) + delta}
   }

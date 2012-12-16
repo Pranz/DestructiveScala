@@ -6,7 +6,7 @@ import org.newdawn.slick.geom.Shape
 import org.newdawn.slick.Graphics
 import collection.mutable.ArrayBuffer
 
-class Entity( pos:Vector, body:Shape) extends Interactive(pos, body) with Physical 
+abstract class Entity( pos:Vector, body:Shape) extends Interactive(pos, body) with Physical 
 	with Renderable{
   
   (Entity list) += this
@@ -26,7 +26,7 @@ class Entity( pos:Vector, body:Shape) extends Interactive(pos, body) with Physic
   var accerelation = V(0, 0)
   var gravity      = 0.15f
   var moving       = false
-  var jumpPower    = 6
+  var jumpPower:Float
   private var spd  = 0.6f
   private var hfr  = 0.3f
 
@@ -108,8 +108,6 @@ class Entity( pos:Vector, body:Shape) extends Interactive(pos, body) with Physic
   def jump() {
     if(onGround){
       vspeed -= jumpPower
-      val groundObj = placeMeetingList(position.x, position.y + 1, ((Physical list).filter(_.solid)))
-      if (groundObj != None) movement += groundObj.get.movement
     }
   }
   
@@ -130,12 +128,19 @@ class Entity( pos:Vector, body:Shape) extends Interactive(pos, body) with Physic
   def moveX(x:Float) {
     if (math.abs(x) >= 1){
       if (collidesAny(position.x + x, position.y, true)) {
+        if(!collidesAny(position.x + Math.signum(x), position.y - 1, true)){
+          position.y -= 2
+        }
+        else hspeed = 0
+        
         moveX(x - math.signum(x))
-        hspeed = 0
       }
-      else if (!collidesAny(position.x + x, position.y, true)) position.x += x
+      else position.x += x
     }
     else if (!collidesAny(position.x + math.signum(x), position.y, true)) position.x += x
+    else if(!collidesAny(position.x + Math.signum(x), position.y - 1, true)){
+          position.y -= 2
+        }
     else hspeed = 0
   }
   

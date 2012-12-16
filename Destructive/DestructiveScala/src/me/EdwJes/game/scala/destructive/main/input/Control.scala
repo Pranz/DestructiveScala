@@ -4,6 +4,7 @@ import me.EdwJes.game.scala.destructive.main.Main
 import me.EdwJes.game.scala.destructive.main.objects.GameObject
 import org.newdawn.slick.{KeyListener, Input}
 import collection.mutable.ArrayBuffer
+import collection.immutable.HashMap
 
 abstract class Control(playerID:Int) extends GameObject with KeyListener {
   
@@ -31,11 +32,11 @@ object Control {
     ACTION_5, ACTION_6, ACTION_7, ACTION_8, ACTION_9 = Value
   }
   
-  val keyMap = collection.immutable.HashMap(
+  val keyMap = HashMap(
       0 -> Key.MOVE_LEFT  -> Input.KEY_A,
       0 -> Key.MOVE_RIGHT -> Input.KEY_D,
       0 -> Key.MOVE_DOWN  -> Input.KEY_S,
-      0 -> Key.MOVE_UP 	 -> Input.KEY_W,
+      0 -> Key.MOVE_UP 	  -> Input.KEY_W,
       0 -> Key.JUMP       -> Input.KEY_SPACE
   )
 }

@@ -6,9 +6,12 @@ import org.newdawn.slick.geom.Shape
 
 abstract class Interactive(var position:Vector, var body:Shape) extends GameObject {
   
+  var bodyOffset = Vector(0,0)
+  
   (Interactive list) += this
   var previousPosition:Vector = position
   def deltaPosition = previousPosition + (-position)
+  private def bodyCenter_ = position + bodyOffset
   
   private var sol = false
   def solid:Boolean = sol
@@ -25,7 +28,7 @@ abstract class Interactive(var position:Vector, var body:Shape) extends GameObje
   }
   
   override def update {
-    body.setLocation(position.x, position.y)
+    body.setLocation(bodyCenter_.x, bodyCenter_.y)
   }
   
   def move(dpos:Vector) {
