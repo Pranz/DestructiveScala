@@ -82,5 +82,5 @@ object DefaultPhysical extends Interactive(NullVector, new Rectangle(0,0,0,0)) w
   
   var movement:Vector = Vector(0,0)
   var accerelation:Vector = Vector(0,0)
-  var gravity:Float = 0
+  var gravity:Float = 0 //test
 }
