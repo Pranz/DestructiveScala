@@ -1,6 +1,6 @@
 package me.EdwJes.game.scala.destructive.main.objects
 
-class Alarm(frames:Int, f:() => Unit, loop:Boolean = false) extends GameObject {
+class Alarm(frames:Int, f: () => Unit, loop:Boolean = false) extends GameObject {
   
   if(frames == 0) execute
 
